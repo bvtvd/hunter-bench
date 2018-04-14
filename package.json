@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.6-beta",
-        "iview": "^2.13.0"
+        "iview": "^2.13.0",
+        "less": "^3.0.1",
+        "less-loader": "^4.1.0"
     }
 }

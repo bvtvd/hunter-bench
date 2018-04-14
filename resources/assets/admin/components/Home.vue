@@ -26,6 +26,7 @@
                             </MenuItem>
                             <MenuItem name="5">
                                 <Dropdown>
+                                    <span>昵称</span>&nbsp;
                                     <Avatar :src="$auth.user().avatar" v-if="$auth.user().avatar"/>
                                     <Avatar icon="person" style="background-color: #87d068" v-else/>
                                     <DropdownMenu slot="list">

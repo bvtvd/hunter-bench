@@ -26,12 +26,19 @@ Route::post('auth/login', 'AuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function(){
     Route::get('auth/user', 'AuthController@user');
     Route::post('auth/logout', 'AuthController@logout');
+
+    Route::group([ 'namespace' => 'Admin' ], function(){
+        // 客户管理
+        Route::resource('clients', 'ClientController');
+    });
+
+
 });
 Route::group(['middleware' => 'jwt.refresh'], function(){
     Route::get('auth/refresh', 'AuthController@refresh');
 });
 
-
+/**
 Route::group(['middleware' => 'jwt.auth'], function(){
     Route::get('articles', 'ArticleController@index');
     Route::get('articles/{article}', 'ArticleController@show');
@@ -39,3 +46,4 @@ Route::group(['middleware' => 'jwt.auth'], function(){
     Route::put('articles/{article}', 'ArticleController@update');
     Route::delete('articles/{article}', 'ArticleController@delete');
 });
+*/

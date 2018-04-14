@@ -12,8 +12,8 @@ Vue.use(VueAxios, axios);
 Vue.use(iView);
 
 axios.defaults.baseURL = 'http://apidemo.test/api';
+Vue.router = new VueRouter(router)
 
-Vue.router = new VueRouter(router);
 Vue.use(require('@websanova/vue-auth'), {
     auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
     http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
@@ -21,4 +21,32 @@ Vue.use(require('@websanova/vue-auth'), {
 });
 App.router = Vue.router;
 
-const app = new Vue(App).$mount('#app');
+// const app = new Vue(App).$mount('#app');
+const app = new Vue({
+    el: '#app',
+    render: h => h(App),
+    mounted() {
+        this.setResponseInterceptors();
+    },
+    methods: {
+        setResponseInterceptors(){
+            // 添加响应拦截器
+            axios.interceptors.response.use(response => response, error => {
+                // 对错误响应做点什么
+                let status = error.response.status;
+                if(400 == status){
+                    if(error.response.data.error){
+                        this.$Message.error(error.response.data.error);
+                    }else if(error.response.data.msg){
+                        this.$Message.error(error.response.data.msg);
+                    }else{
+                        this.$Message.error('操作失败, 请刷新重试');
+                    }
+                }else{
+                    this.$Message.error('服务器除了点小差错, 请联系管理员');
+                }
+                return Promise.reject(error);
+            });
+        }
+    }
+});

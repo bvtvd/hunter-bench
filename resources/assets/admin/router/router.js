@@ -24,10 +24,15 @@ export default {
                         {
                             path: 'client',
                             name: 'hunter.client',
-                            component: () => import('../components/hunter/Client'),
+                            component: () => import('../components/hunter/client/Client'),
+                        },
+                        {
+                            path: 'client/:id',
+                            name: 'hunter.client.detail',
+                            component: () => import('../components/hunter/client/Detail'),
                         }
                     ]
-                }
+                },
             ]
         },
         {

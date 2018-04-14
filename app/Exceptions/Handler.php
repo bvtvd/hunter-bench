@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -53,6 +54,9 @@ class Handler extends ExceptionHandler
             return response()->json([
                 'error' => 'Resource not found.'
             ],404);
+        }
+        if ($exception instanceof ValidationException){ // 自定义验证错误
+            return response()->json(['msg' => $exception->validator->errors()->first(), 'remark' => '这是一个验证错误'], 400);
         }
 
         return parent::render($request, $exception);

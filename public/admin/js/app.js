@@ -29,7 +29,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		4: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"026591c7cd2c0a5d6baa","4":"7798e46659a6b2158161","5":"dae5162e07bd84072f32","6":"e8c91ee579a2f71bd1d7"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"5":"4845d4d2b0e50fce144b","6":"cd6b517b5ed118a06816","7":"74c5b054cb1fd7eccea2","8":"5ee33c8d5bfbcb5793fe","9":"7422773a7bf191bcd42d"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -12322,8 +12322,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_iview___default.a);
 
 __WEBPACK_IMPORTED_MODULE_2_axios___default.a.defaults.baseURL = 'http://apidemo.test/api';
-
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */](__WEBPACK_IMPORTED_MODULE_5__router_router__["a" /* default */]);
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__webpack_require__(52), {
     auth: __webpack_require__(56),
     http: __webpack_require__(57),
@@ -12331,7 +12331,42 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__webpack_require__(52), {
 });
 __WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */].router = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.router;
 
-var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]).$mount('#app');
+// const app = new Vue(App).$mount('#app');
+var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
+    el: '#app',
+    render: function render(h) {
+        return h(__WEBPACK_IMPORTED_MODULE_4__App_vue__["a" /* default */]);
+    },
+    mounted: function mounted() {
+        this.setResponseInterceptors();
+    },
+
+    methods: {
+        setResponseInterceptors: function setResponseInterceptors() {
+            var _this = this;
+
+            // 添加响应拦截器
+            __WEBPACK_IMPORTED_MODULE_2_axios___default.a.interceptors.response.use(function (response) {
+                return response;
+            }, function (error) {
+                // 对错误响应做点什么
+                var status = error.response.status;
+                if (400 == status) {
+                    if (error.response.data.error) {
+                        _this.$Message.error(error.response.data.error);
+                    } else if (error.response.data.msg) {
+                        _this.$Message.error(error.response.data.msg);
+                    } else {
+                        _this.$Message.error('操作失败, 请刷新重试');
+                    }
+                } else {
+                    _this.$Message.error('服务器除了点小差错, 请联系管理员');
+                }
+                return Promise.reject(error);
+            });
+        }
+    }
+});
 
 /***/ }),
 /* 17 */
@@ -16215,7 +16250,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 59));
+            return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 59));
         },
         meta: {
             title: '首页',
@@ -16225,13 +16260,19 @@ if (false) {
             path: '/hunter',
             name: 'hunter.index',
             component: function component() {
-                return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 61));
+                return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 60));
             },
             children: [{
                 path: 'client',
                 name: 'hunter.client',
                 component: function component() {
-                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 76));
+                    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 83));
+                }
+            }, {
+                path: 'client/:id',
+                name: 'hunter.client.detail',
+                component: function component() {
+                    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 88));
                 }
             }]
         }]
@@ -16239,7 +16280,7 @@ if (false) {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 60));
+            return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 62));
         },
         meta: {
             auth: false
