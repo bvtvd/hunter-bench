@@ -24,7 +24,7 @@
                     <MenuItem name="">
                         <template>
                             <Icon type="briefcase"></Icon>
-                            职位管理
+                            <span @click="$router.push({ name: 'hunter.job'})">职位管理</span>
                         </template>
                     </MenuItem>
                 </Menu>

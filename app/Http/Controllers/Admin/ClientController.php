@@ -13,15 +13,15 @@ use Auth;
 class ClientController extends Controller
 {
     /**
-     * @api {get} /clients  客户列表
+     * @api {get} /clients    客户列表
      * @apiName  客户列表
-     * @apiDescription  ...
+     * @apiDescription  客户列表
      * @apiGroup Clients
+     * @apiVersion 1.0.0
      *
      * @apiParam {String} [keyword]   客户名称搜索
      * @apiParam {Int}   [page]     跳转页数
      * @apiParam {Int} [limits]    每页条数
-     *
      */
     public function index(Request $request)
     {
@@ -47,14 +47,14 @@ class ClientController extends Controller
     }
 
     /**
-     * @api {post} /clients  新增客户
+     * @api {post} /clients    新增客户
      * @apiName  新增客户
-     * @apiDescription  ...
+     * @apiDescription  新增客户
      * @apiGroup Clients
+     * @apiVersion 1.0.0
      *
      * @apiParam {String} name  客户名称
      * @apiParam {String} [remark]  备注
-     *
      */
     public function store(ClientStoreRequest $request)
     {

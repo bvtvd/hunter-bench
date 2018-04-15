@@ -30,6 +30,8 @@ Route::group(['middleware' => 'jwt.auth'], function(){
     Route::group([ 'namespace' => 'Admin' ], function(){
         // 客户管理
         Route::resource('clients', 'ClientController');
+        // 客户职位管理
+        Route::resource('jobs', 'ClientJobController');
     });
 
 

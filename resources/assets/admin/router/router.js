@@ -20,17 +20,34 @@ export default {
                     path: '/hunter',
                     name: 'hunter.index',
                     component: () => import('../components/hunter/Index'),
+                    meta: {
+                        title: '猎场.首页'
+                    },
                     children: [
                         {
                             path: 'client',
                             name: 'hunter.client',
+                            meta: {
+                                title: '猎场.客户列表'
+                            },
                             component: () => import('../components/hunter/client/Client'),
                         },
                         {
                             path: 'client/:id',
                             name: 'hunter.client.detail',
+                            meta: {
+                                title: '猎场.客户详情'
+                            },
                             component: () => import('../components/hunter/client/Detail'),
-                        }
+                        },
+                        {
+                            path: 'job',
+                            name: 'hunter.job',
+                            meta: {
+                                title: '猎场.职位列表'
+                            },
+                            component: () => import('../components/hunter/job/Job'),
+                        },
                     ]
                 },
             ]

@@ -9,6 +9,7 @@ apidoc -i app/Http/Controllers -o public/apidoc/
  * @api {get} /user/:id Request User information
  * @apiName GetUser
  * @apiGroup User
+ * @apiVersion 1.6.2
  *
  * @apiParam {Number} id Users unique ID.
  *

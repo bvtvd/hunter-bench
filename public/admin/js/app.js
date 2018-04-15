@@ -29,7 +29,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		4: 0
+/******/ 		6: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"5":"4845d4d2b0e50fce144b","6":"cd6b517b5ed118a06816","7":"74c5b054cb1fd7eccea2","8":"5ee33c8d5bfbcb5793fe","9":"7422773a7bf191bcd42d"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"c3a5ac2667f4f1189c99","1":"2ec81a1bda1b8e0de992","2":"e59920e94ec9b81fad9a","3":"927d16126679958cc39c","4":"41b1134b55bf941d7719","5":"cd79fa655fdbc169b8e2"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -16250,7 +16250,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 59));
+            return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 59));
         },
         meta: {
             title: '首页',
@@ -16260,19 +16260,37 @@ if (false) {
             path: '/hunter',
             name: 'hunter.index',
             component: function component() {
-                return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 60));
+                return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 60));
+            },
+            meta: {
+                title: '猎场.首页'
             },
             children: [{
                 path: 'client',
                 name: 'hunter.client',
+                meta: {
+                    title: '猎场.客户列表'
+                },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 83));
+                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 61));
                 }
             }, {
                 path: 'client/:id',
                 name: 'hunter.client.detail',
+                meta: {
+                    title: '猎场.客户详情'
+                },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 88));
+                    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 62));
+                }
+            }, {
+                path: 'job',
+                name: 'hunter.job',
+                meta: {
+                    title: '猎场.职位列表'
+                },
+                component: function component() {
+                    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 63));
                 }
             }]
         }]
@@ -16280,7 +16298,7 @@ if (false) {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 62));
+            return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 64));
         },
         meta: {
             auth: false
