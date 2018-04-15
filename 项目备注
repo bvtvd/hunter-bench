@@ -31,3 +31,19 @@ apidoc -i app/Http/Controllers -o public/apidoc/
  *       "error": "UserNotFound"
  *     }
  */
+
+
+ 推荐的一生
+    - when(啥时候推荐了)
+    - 啥时候去面试了
+    - 面试成功还是失败了
+
+
+ 职位的一生
+    - 啥时候推荐了谁
+    - 啥时候睡去面试了
+    - 面试结果
+    - 职位的结果(成功, 失败, 关闭)
+
+在follow_records中加上  job_id 字段
+并且还要多加几个类型 5. 创建了该职位   6, 职位标记为成功 7. 职位标记为失败,   8. 关闭该职位
