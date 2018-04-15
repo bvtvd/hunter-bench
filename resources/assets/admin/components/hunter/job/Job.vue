@@ -43,6 +43,9 @@
 </template>
 
 <script>
+    import MarkPoptip  from './components/MarkPoptip';
+
+
     export default {
         mounted() {
             this.getListData();
@@ -82,6 +85,7 @@
                         // type: 'index',
                         title: '#',
                         // key: 'index',
+                        width: 40,
                         render: (h, params) => {
                             return h('span', this.getListIndex(params.index));
                         }
@@ -96,12 +100,46 @@
                     },
                     {
                         title: '创建时间',
-                        key: 'created_at'
+                        key: 'created_at',
+                        minWidth: 150
+                    },
+                    {
+                        title: '职位状态',
+                        key: 'status',
+                        render: (h, params) => {
+                            return this.getStatusContent(h, params);
+                        }
+                    },
+                    {
+                        title: '已推数',
+                        key: ''
                     },
                     {
                         title: '操作',
+                        minWidth: 250,
+                        // type: 'html',
                         render: (h, params) => {
                             return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        color: '#19be6b'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            // 跳转到详情页
+                                            // this.goClientDetail(params.row.id);
+                                        }
+                                    }
+                                }, '推荐'),
+                                h(MarkPoptip, {
+                                    props: {
+                                        job_id: params.row.id
+                                    }
+                                }),
                                 h('Button', {
                                     props: {
                                         type: 'text',
@@ -193,6 +231,79 @@
                     name: 'hunter.client.detail',
                     params: { id: id },
                 })
+            },
+            // 获取职位内容,
+            getStatusContent(h, params){
+                // 1. 寻找人选, 2, 推荐中, 3, 失败, 4, 成功,  5. 关闭,
+                let status = params.row.status;
+                let content;
+                if(1 == status){    // 寻找中
+                    content = h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small',
+                                icon: 'ios-search'
+                            },
+                            style: {
+                                color: '#ed3f14'
+                            }
+                        }, '寻找中...')
+                    ]);
+                }else if(2 == status){  // 推荐中
+                    content = h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small',
+                                icon: 'android-chat'
+                            },
+                            style: {
+                                color: '#ff9900'
+                            }
+                        }, '已推荐')
+                    ]);
+                }else if(3 == status){  // 失败
+                    content = h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small',
+                                icon: 'sad-outline'
+                            },
+                            style: {
+                                color: '#bbbec4'
+                            }
+                        }, '失败')
+                    ]);
+                }else if(4 == status){  // 成功
+                    content = h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small',
+                                icon: 'happy-outline'
+                            },
+                            style: {
+                                color: '#19be6b'
+                            }
+                        }, '推荐成功')
+                    ]);
+                }else if(5 == status){
+                    content = h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small',
+                                icon: 'ios-close'
+                            },
+                            style: {
+                                color: '#bbbec4'
+                            }
+                        }, '已关闭')
+                    ]);
+                }
+                return content;
             }
         }
     }

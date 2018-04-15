@@ -20,6 +20,7 @@ class JobListCollection extends ResourceCollection
                 return [
                     'id' => $item['id'],
                     'name' => $item['name'],
+                    'status' => $item['status'],
                     'client_name' => data_get($item, 'client.name'),
                     'created_at' => $item['created_at']
                 ];

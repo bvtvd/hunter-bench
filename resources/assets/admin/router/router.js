@@ -19,6 +19,7 @@ export default {
                 {
                     path: '/hunter',
                     name: 'hunter.index',
+                    redirect: { name: 'hunter.client' },    // 先重定向都客户列表, 后面改为我的推荐
                     component: () => import('../components/hunter/Index'),
                     meta: {
                         title: '猎场.首页'

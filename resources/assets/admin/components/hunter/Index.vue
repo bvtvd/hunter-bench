@@ -2,26 +2,26 @@
     <div class="layout">
         <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
-                <Menu active-name="" theme="light" width="auto" :open-names="['1']">
-                    <MenuItem name="1-1">
+                <Menu :active-name="activeName" theme="light" width="auto" :open-names="['1']">
+                    <MenuItem name="recommend">
                         <template>
                             <Icon type="android-hangout"></Icon>
                             我的推荐
                         </template>
                     </MenuItem>
-                    <MenuItem name="hunter.client">
+                    <MenuItem name="client">
                         <template>
                             <Icon type="social-yen"></Icon>
                             <span @click="$router.push({ name: 'hunter.client'})">客户管理</span>
                         </template>
                     </MenuItem>
-                    <MenuItem name="">
+                    <MenuItem name="candidate">
                         <template>
                             <Icon type="ios-people"></Icon>
                             人选管理
                         </template>
                     </MenuItem>
-                    <MenuItem name="">
+                    <MenuItem name="job">
                         <template>
                             <Icon type="briefcase"></Icon>
                             <span @click="$router.push({ name: 'hunter.job'})">职位管理</span>
@@ -39,7 +39,28 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('job.index');
+            this.lightCurrentMenu();    // 点亮当前菜单
+        },
+        data() {
+            return {
+                activeName: 'recommend',
+            }
+        },
+        methods: {
+            // 获取当前路由别名
+            getCurrentRouteName(){
+                return this.$router.currentRoute.name;
+            },
+            // 获取第二层路由的名称
+            getSubRouteName(){
+                return this.getCurrentRouteName().split('.')[1];
+            },
+            // 点亮当前菜单
+            lightCurrentMenu(){
+                this.activeName = this.getSubRouteName();
+            },
+
         }
     }
 </script>

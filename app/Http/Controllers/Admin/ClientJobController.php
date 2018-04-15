@@ -20,8 +20,9 @@ class ClientJobController extends Controller
     {
         // 查询当前用户创建的所有职位
         $jobs = ClientJob::mine()
-        ->clientInfo()
-        ->paginate($request->input('limits', 10));
+            ->clientInfo()
+            ->orderBy('updated_at', 'desc')
+            ->paginate($request->input('limits', 10));
         return new JobListCollection($jobs);
     }
 

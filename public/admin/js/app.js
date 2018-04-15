@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"c3a5ac2667f4f1189c99","1":"2ec81a1bda1b8e0de992","2":"e59920e94ec9b81fad9a","3":"927d16126679958cc39c","4":"41b1134b55bf941d7719","5":"cd79fa655fdbc169b8e2"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"68f9e5d534f2f00ce816","1":"ea09d7fb3fa4088f3664","2":"6a515b70b24106a34bdd","3":"7e9bf13bc30fcce57801","4":"4d5102f3196743e98dbd","5":"cd79fa655fdbc169b8e2"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -16250,7 +16250,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 59));
+            return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 59));
         },
         meta: {
             title: '首页',
@@ -16259,8 +16259,9 @@ if (false) {
         children: [{
             path: '/hunter',
             name: 'hunter.index',
+            redirect: { name: 'hunter.client' }, // 先重定向都客户列表, 后面改为我的推荐
             component: function component() {
-                return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 60));
+                return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 60));
             },
             meta: {
                 title: '猎场.首页'
@@ -16272,7 +16273,7 @@ if (false) {
                     title: '猎场.客户列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 61));
+                    return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 61));
                 }
             }, {
                 path: 'client/:id',
@@ -16290,7 +16291,7 @@ if (false) {
                     title: '猎场.职位列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 63));
+                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 63));
                 }
             }]
         }]
@@ -16298,7 +16299,7 @@ if (false) {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 64));
+            return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 64));
         },
         meta: {
             auth: false

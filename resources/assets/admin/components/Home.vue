@@ -3,16 +3,16 @@
         <Layout>
             <div ref="header">
                 <Header>
-                    <Menu mode="horizontal" theme="dark" active-name="1">
+                    <Menu mode="horizontal" theme="dark" :active-name="activeName">
                         <div class="layout-logo">
 
                         </div>
                         <div class="layout-nav" >
-                            <MenuItem name="1">
+                            <MenuItem name="home">
                                 <Icon type="ios-navigate"></Icon>
                                 <span @click="$router.push({ name: 'home'})">首页</span>
                             </MenuItem>
-                            <MenuItem name="2">
+                            <MenuItem name="hunter">
                                 <Icon type="ios-keypad"></Icon>
                                 <span @click="$router.push({ name: 'hunter.index'})">猎场</span>
                             </MenuItem>
@@ -72,10 +72,12 @@
         mounted(){
             console.log('Home');
             this.setContentMinHeight()
+            this.lightCurrentMenu();
         },
         data() {
             return {
-                contentMinHeight: '700px'
+                contentMinHeight: '700px',
+                activeName: 'home',
             }
         },
         methods: {
@@ -94,7 +96,19 @@
                     makeRequest: true,
                     redirect: '/login'
                 });
-            }
+            },
+            // 获取当前路由别名
+            getCurrentRouteName(){
+                return this.$router.currentRoute.name;
+            },
+            // 获取第一层路由的名称
+            getFirstRouteName(){
+                return this.getCurrentRouteName().split('.')[0];
+            },
+            // 点亮当前菜单
+            lightCurrentMenu(){
+                this.activeName = this.getFirstRouteName();
+            },
         }
     }
 </script>

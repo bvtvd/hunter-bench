@@ -18,7 +18,7 @@ class CreateClientJobsTable extends Migration
             $table->unsignedInteger('user_id')->comment('录入者id');
             $table->unsignedInteger('client_id')->comment('客户id');
             $table->string('name')->comment('职位名称');
-            $table->tinyInteger('status')->nullable()->default(1)->comment('状态, 1. 寻找人选 2. 推荐中  5. 失败   6. 成功  7. 关闭');
+            $table->tinyInteger('status')->nullable()->default(1)->comment('状态, 1. 寻找人选 2. 推荐中  3. 失败   4. 成功  5. 关闭');
             $table->text('remark')->nullable()->comment('备注');
             $table->timestamps();
 
