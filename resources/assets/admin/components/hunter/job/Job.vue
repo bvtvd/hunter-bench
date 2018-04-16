@@ -138,6 +138,11 @@
                                 h(MarkPoptip, {
                                     props: {
                                         job_id: params.row.id
+                                    },
+                                    on: {
+                                        statusUpdated: () => {
+                                            this.getListData();
+                                        }
                                     }
                                 }),
                                 h('Button', {

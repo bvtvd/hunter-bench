@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\JobCreated;
+use App\Events\JobMarkClose;
+use App\Events\JobMarkFail;
+use App\Events\JobMarkSuccess;
 use App\Http\Requests\Admin\JobStoreRequest;
 use App\Http\Resources\Admin\ClientJob\JobListCollection;
 use App\Models\ClientJob;
@@ -53,7 +57,8 @@ class ClientJobController extends Controller
         $data['user_id'] = Auth::id();
 
         // 不检查重复
-        ClientJob::create($data);
+        $job = ClientJob::create($data);
+        event(new JobCreated(Auth::user(), $job));  // 出发职位添加成功事件
         return $this->responseSuccess();
     }
 
@@ -100,5 +105,65 @@ class ClientJobController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @api {put} /jobs/mark/success/:id    标记职位为成功
+     * @apiName  标记职位为成功
+     * @apiDescription  标记职位为成功
+     * @apiGroup Client-Jobs
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markSuccess(Request $request, ClientJob $job)
+    {
+        if($job && $job->user_id == Auth::id()){
+            $job->update(['status' => 4]);  // 改为成功状态
+            # 触发成功事件
+            event(new JobMarkSuccess(Auth::user(), $job));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
+    }
+
+    /**
+     * @api {put} /jobs/mark/fail/:id    标记职位为失败
+     * @apiName  标记职位为失败
+     * @apiDescription  标记职位为失败
+     * @apiGroup Client-Jobs
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markFail(Request $request, ClientJob $job)
+    {
+        if($job && $job->user_id == Auth::id()){
+            $job->update(['status' => 3]);  // 改为成功状态
+            # 触发失败事件
+            event(new JobMarkFail(Auth::user(), $job));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
+    }
+
+    /**
+     * @api {put} /jobs/mark/close/:id    标记职位为关闭
+     * @apiName  标记职位为关闭
+     * @apiDescription  标记职位为关闭
+     * @apiGroup Client-Jobs
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markClose(Request $request, ClientJob $job)
+    {
+        if($job && $job->user_id == Auth::id()){
+            $job->update(['status' => 5]);  // 改为成功状态
+            #  触发关闭事件
+            event(new JobMarkClose(Auth::user(), $job));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
     }
 }

@@ -1,5 +1,76 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/jobs",
+    "title": "新增职位",
+    "name": "____",
+    "description": "<p>新增职位</p>",
+    "group": "Client_Jobs",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "client_id",
+            "description": "<p>客户id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>职位名称</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "remark",
+            "description": "<p>备注</p>"
+          }
+        ]
+      }
+    },
+    "filename": "app/Http/Controllers/Admin/ClientJobController.php",
+    "groupTitle": "Client_Jobs"
+  },
+  {
+    "type": "put",
+    "url": "/jobs/mark/success/:id",
+    "title": "标记职位为成功",
+    "name": "_______",
+    "description": "<p>标记职位为成功</p>",
+    "group": "Client_Jobs",
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Admin/ClientJobController.php",
+    "groupTitle": "Client_Jobs"
+  },
+  {
+    "type": "put",
+    "url": "/jobs/mark/fail/:id",
+    "title": "标记职位为失败",
+    "name": "_______",
+    "description": "<p>标记职位为失败</p>",
+    "group": "Client_Jobs",
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Admin/ClientJobController.php",
+    "groupTitle": "Client_Jobs"
+  },
+  {
+    "type": "put",
+    "url": "/jobs/mark/close/:id",
+    "title": "标记职位为关闭",
+    "name": "_______",
+    "description": "<p>标记职位为关闭</p>",
+    "group": "Client_Jobs",
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Admin/ClientJobController.php",
+    "groupTitle": "Client_Jobs"
+  },
+  {
     "type": "get",
     "url": "/clients",
     "title": "客户列表",

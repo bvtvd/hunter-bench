@@ -30,7 +30,14 @@ Route::group(['middleware' => 'jwt.auth'], function(){
     Route::group([ 'namespace' => 'Admin' ], function(){
         // 客户管理
         Route::resource('clients', 'ClientController');
+
         // 客户职位管理
+        Route::group(['prefix' => 'jobs'], function(){
+            Route::put('mark/success/{job}', 'ClientJobController@markSuccess');   // 标记为成功
+            Route::put('mark/fail/{job}', 'ClientJobController@markFail'); // 标记为失败
+            Route::put('mark/close/{job}', 'ClientJobController@markClose');  // 标记为关闭
+        });
+
         Route::resource('jobs', 'ClientJobController');
     });
 

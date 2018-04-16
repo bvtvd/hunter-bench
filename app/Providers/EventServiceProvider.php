@@ -13,8 +13,17 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\Events\JobCreated' => [
+            'App\Listeners\JobCreatedRecord',
+        ],
+        'App\Events\JobMarkSuccess' => [
+            'App\Listeners\JobMarkSuccessRecord',
+        ],
+        'App\Events\JobMarkFail' => [
+            'App\Listeners\JobMarkFailRecord',
+        ],
+        'App\Events\JobMarkClose' => [
+            'App\Listeners\JobMarkCloseRecord',
         ],
     ];
 
