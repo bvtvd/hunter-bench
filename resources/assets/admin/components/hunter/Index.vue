@@ -2,7 +2,7 @@
     <div class="layout">
         <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
-                <Menu :active-name="activeName" theme="light" width="auto" :open-names="['1']">
+                <Menu :active-name="activeName" theme="light" width="auto" :open-names="['1']" @on-select="menuSelect">
                     <MenuItem name="recommend">
                         <template>
                             <Icon type="android-hangout"></Icon>
@@ -12,19 +12,20 @@
                     <MenuItem name="client">
                         <template>
                             <Icon type="social-yen"></Icon>
-                            <span @click="$router.push({ name: 'hunter.client'})">客户管理</span>
+                            <span @click="">客户管理</span>
                         </template>
                     </MenuItem>
                     <MenuItem name="candidate">
                         <template>
                             <Icon type="ios-people"></Icon>
+                            <span @click=""></span>
                             人选管理
                         </template>
                     </MenuItem>
                     <MenuItem name="job">
                         <template>
                             <Icon type="briefcase"></Icon>
-                            <span @click="$router.push({ name: 'hunter.job'})">职位管理</span>
+                            <span @click="">职位管理</span>
                         </template>
                     </MenuItem>
                 </Menu>
@@ -60,7 +61,9 @@
             lightCurrentMenu(){
                 this.activeName = this.getSubRouteName();
             },
-
+            menuSelect(name){
+                this.$router.push({ name : 'hunter.' + name});
+            }
         }
     }
 </script>

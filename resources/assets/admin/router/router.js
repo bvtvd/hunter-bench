@@ -49,6 +49,14 @@ export default {
                             },
                             component: () => import('../components/hunter/job/Job'),
                         },
+                        {
+                            path: 'candidate',
+                            name: 'hunter.candidate',
+                            meta: {
+                                title: '猎场.人选管理'
+                            },
+                            component: () => import('../components/hunter/candidate/Candidate'),
+                        },
                     ]
                 },
             ]

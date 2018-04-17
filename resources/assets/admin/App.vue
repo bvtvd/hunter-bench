@@ -9,3 +9,7 @@
         }
     }
 </script>
+
+<style>
+    @import './styles/common/common.css';
+</style>

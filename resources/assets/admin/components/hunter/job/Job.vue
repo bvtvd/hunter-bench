@@ -5,7 +5,7 @@
                 <TabPane label="职位管理" name="name1">
                     <Table :columns="columns" :data="data" size="small"></Table>
                     <div class="page">
-                        <Page :total="parseInt(pageData.total)" :page-size="parseInt(pageData.per_page)" :current="parseInt(pageData.current_page)" @on-change="handlePageChange" @on-page-size-change="handlePageSizeChange" size="small" :page-size-opts="[10, 20, 30, 50, 100]" show-elevator show-sizer></Page>
+                        <Page :total="parseInt(pageData.total)" :page-size="parseInt(pageData.per_page)" :current="parseInt(pageData.current_page)" @on-change="handlePageChange" @on-page-size-change="handlePageSizeChange" size="small" placement="top" :page-size-opts="[10, 20, 30, 50, 100]" show-elevator show-sizer></Page>
                     </div>
                 </TabPane>
                 <!--列表搜索-->
@@ -85,7 +85,6 @@
                         // type: 'index',
                         title: '#',
                         // key: 'index',
-                        width: 40,
                         render: (h, params) => {
                             return h('span', this.getListIndex(params.index));
                         }
@@ -315,9 +314,6 @@
 </script>
 
 <style scope lang="less">
-    .page{
-        padding-top: 1rem;
-    }
     .vertical-center-modal{
         display: flex;
         align-items: center;

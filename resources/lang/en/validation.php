@@ -88,6 +88,9 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
+    // extends validation
+    'mobile' => 'The :attribute is not a correct phone number.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

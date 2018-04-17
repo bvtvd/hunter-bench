@@ -60,6 +60,9 @@ return [
     ],
     'url'                  => ':attribute 无效的格式',
     'timezone'             => ':attribute 必须个有效的时区',
+
+    // extends validation
+    'mobile' => ':attribute 不是一个正确的手机号码',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

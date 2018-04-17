@@ -37,8 +37,10 @@ Route::group(['middleware' => 'jwt.auth'], function(){
             Route::put('mark/fail/{job}', 'ClientJobController@markFail'); // 标记为失败
             Route::put('mark/close/{job}', 'ClientJobController@markClose');  // 标记为关闭
         });
-
         Route::resource('jobs', 'ClientJobController');
+
+        // 人选管理
+        Route::resource('candidates', 'CandidateController');
     });
 
 
