@@ -115,6 +115,13 @@
                         minWidth: 190
                     },
                     {
+                        title: '状态)',
+                        key: 'status',
+                        render: (h, params) => {
+                            return  this.getStatusBadge(h, params.row.status);
+                        }
+                    },
+                    {
                         title: '公司',
                         key: 'current_company',
                     },
@@ -149,19 +156,10 @@
                                     on: {
                                         click: () => {
                                             // 跳转到详情页
-                                            this.goClientDetail(params.row.id);
+                                            this.goCandidateDetail(params.row.id);
                                         }
                                     }
-                                }, '详情'),
-                                h('Button', {
-                                    props: {
-                                        type: 'text',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        color: '#ff9900'
-                                    },
-                                }, '修改')
+                                }, '详情')
                             ]);
                         }
                     }
@@ -220,11 +218,34 @@
                 this.formValidate.graduation_at = value;
             },
             // 跳转到客户详情页
-            goClientDetail(id) {
+            goCandidateDetail(id) {
                 this.$router.push({
-                    name: 'hunter.client.detail',
+                    name: 'hunter.candidate.detail',
                     params: { id: id },
                 })
+            },
+            // 获取状态徽标
+            getStatusBadge(h, status) {
+                let content;
+                if(1 == status){
+                    content = h('Badge', {
+                        props: {
+                            count: '在职',
+                            className: 'badge-work',
+                        }
+                    });
+                }else if(2 == status){
+                    content = h('Badge', {
+                        props: {
+                            count: '离职',
+                            className: 'badge-departure',
+                        },
+                        styles: {
+                            background: '#19be6b'
+                        }
+                    });
+                }
+                return content;
             }
         }
     }
@@ -239,5 +260,11 @@
         .ivu-modal{
             top: 0;
         }
+    }
+    .badge-departure{
+        background: #19be6b !important;
+    }
+    .badge-work{
+        background: #bbbec4 !important;
     }
 </style>

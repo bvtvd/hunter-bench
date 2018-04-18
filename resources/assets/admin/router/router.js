@@ -57,6 +57,14 @@ export default {
                             },
                             component: () => import('../components/hunter/candidate/Candidate'),
                         },
+                        {
+                            path: 'candidate/:id',
+                            name: 'hunter.candidate.detail',
+                            meta: {
+                                title: '猎场.人选详情'
+                            },
+                            component: () => import('../components/hunter/candidate/Detail'),
+                        },
                     ]
                 },
             ]

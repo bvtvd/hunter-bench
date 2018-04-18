@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>client detail {{ client_id }}</h1>
+        <h1>candite detail {{ client_id }}</h1>
     </div>
 </template>
 

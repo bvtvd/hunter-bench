@@ -12,7 +12,7 @@ use Auth;
 class CandidateController extends Controller
 {
     /**
-     * @api {get} /candidate    人选列表
+     * @api {get} /candidates    人选列表
      * @apiName  人选列表
      * @apiDescription  人选列表
      * @apiGroup Candidates
@@ -50,10 +50,21 @@ class CandidateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @api {post} /candidates    新增人选
+     * @apiName  新增人选
+     * @apiDescription  新增人选
+     * @apiGroup Candidates
+     * @apiVersion 1.0.0
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @apiParam {String}   name                    姓名
+     * @apiParam {String}   mobile                  手机号码
+     * @apiParam {String}   [current_company]       公司
+     * @apiParam {String}   [current_job]           职位
+     * @apiParam {String}   [education]             最高学历
+     * @apiParam {String}   [graduation_at]         毕业时间
+     * @apiParam {String}   [school]                毕业院校
+     * @apiParam {Int}      [status]                状态
+     * @apiParam {string}   [remark]                备注
      */
     public function store(CandidateStoreRequest $request)
     {
@@ -65,14 +76,16 @@ class CandidateController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @api {get} /candidates/:id    人选详情
+     * @apiName  人选详情
+     * @apiDescription  人选详情
+     * @apiGroup Candidates
+     * @apiVersion 1.0.0
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Candidate $candidate)
     {
-        //
+        return $candidate;
     }
 
     /**
@@ -83,7 +96,7 @@ class CandidateController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -93,9 +106,14 @@ class CandidateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Candidate $candidate)
     {
-        //
+        if($candidate->user_id != Auth::id()) return $this->responseFail('没有修改权限');
+
+        $data = $request->only(['name', 'mobile', 'current_company', 'current_job', 'education', 'graduation_at', 'school', 'remark', 'status']);
+
+        $candidate->update($data);
+        return $this->responseSuccess();
     }
 
     /**

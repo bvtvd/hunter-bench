@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"0f3fda3846a5c429d85c","1":"0c1dab38bbcb593c55d5","2":"34dc191b6bfcc19f4a39","3":"58ff9e5bb162f4ff891b","4":"88a647d4bec81ec2f27d","5":"795450ef8ab27cfd6ded","6":"4e0cf3a834f720765378"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"f86c76bcf6126ffb6ebf","8":"29e24c1ca898c92dcf49","9":"88e9219d40f3a7fcdf41","10":"b25e91ee110a86338372","11":"fa2411690e90f843a59b","12":"d7ed888c7ef94313ce00","13":"5c9a738409e4d3708446","14":"acd936dadb884ffd4435"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -16576,7 +16576,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 64));
+            return __webpack_require__.e/* import() */(13).then(__webpack_require__.bind(null, 64));
         },
         meta: {
             title: '首页',
@@ -16587,7 +16587,7 @@ if (false) {
             name: 'hunter.index',
             redirect: { name: 'hunter.client' }, // 先重定向都客户列表, 后面改为我的推荐
             component: function component() {
-                return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 65));
+                return __webpack_require__.e/* import() */(11).then(__webpack_require__.bind(null, 65));
             },
             meta: {
                 title: '猎场.首页'
@@ -16599,7 +16599,7 @@ if (false) {
                     title: '猎场.客户列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 66));
+                    return __webpack_require__.e/* import() */(10).then(__webpack_require__.bind(null, 66));
                 }
             }, {
                 path: 'client/:id',
@@ -16608,7 +16608,7 @@ if (false) {
                     title: '猎场.客户详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 67));
+                    return __webpack_require__.e/* import() */(14).then(__webpack_require__.bind(null, 67));
                 }
             }, {
                 path: 'job',
@@ -16617,7 +16617,7 @@ if (false) {
                     title: '猎场.职位列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 68));
+                    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 68));
                 }
             }, {
                 path: 'candidate',
@@ -16626,7 +16626,16 @@ if (false) {
                     title: '猎场.人选管理'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 69));
+                    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 69));
+                }
+            }, {
+                path: 'candidate/:id',
+                name: 'hunter.candidate.detail',
+                meta: {
+                    title: '猎场.人选详情'
+                },
+                component: function component() {
+                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 102));
                 }
             }]
         }]
@@ -16634,7 +16643,7 @@ if (false) {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 70));
+            return __webpack_require__.e/* import() */(12).then(__webpack_require__.bind(null, 70));
         },
         meta: {
             auth: false

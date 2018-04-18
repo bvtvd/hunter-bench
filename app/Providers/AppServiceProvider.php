@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Extensions\MyValidator;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Resource::withoutWrapping();    // 禁用顶层数据包裹
+        Carbon::setLocale('zh');   // 时间处理本地化
         $this->validatorExtend();   // 验证扩展
     }
 
