@@ -39,19 +39,41 @@
                 </Form>
             </div>
         </Modal>
+
+        <!--推荐职位弹窗-->
+        <Modal
+                title="职位推荐"
+                v-model="recommendModel"
+                class-name="vertical-center-modal"
+                ok-text="提交"
+                :loading="recommendModelLoading"
+                @on-ok="handleRecommendSubmit('recommendValidate')"
+                @on-cancel="handleRecommendCancel('recommendValidate')">
+            <div>
+                <Form ref="recommendValidate" :model="recommendValidate" :rules="recommendRuleValidate" :label-width="80">
+                    <FormItem label="人选" prop="candidate_id">
+                        <Select v-model="recommendValidate.candidate_id" filterable multiple>
+                            <Option v-for="item in candidateList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                        </Select>
+                    </FormItem>
+                </Form>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
     import MarkPoptip  from './components/MarkPoptip';
 
-
     export default {
-        mounted() {
+        mounted() { // 优先级较低
             this.getListData();
+
+            this.getClientListData();   // 获取客户列表
+            this.getCandidateListData(); // 获取人选列表
         },
-        created() {
-            this.getClientListData();
+        created() { // 优先级较高
+
         },
         data() {
             return {
@@ -111,7 +133,7 @@
                     },
                     {
                         title: '已推数',
-                        key: ''
+                        key: 'recommend_number'
                     },
                     {
                         title: '操作',
@@ -129,8 +151,8 @@
                                     },
                                     on: {
                                         click: () => {
-                                            // 跳转到详情页
-                                            // this.goClientDetail(params.row.id);
+                                            // 推荐弹窗
+                                            this.showRecommendModel(params.row.id)
                                         }
                                     }
                                 }, '推荐'),
@@ -173,7 +195,19 @@
                     }
                 ],
                 data: [],
-                clients: []
+                clients: [],
+                recommendValidate: {
+                    candidate_id: [],
+                    job_id: null,
+                },
+                recommendRuleValidate: {
+                    candidate_id: [
+                        { required: true, type: 'array', min: 1, message: '请选择至少一个人选', trigger: 'change' }
+                    ],
+                },
+                recommendModel: false,
+                recommendModelLoading: true,
+                candidateList: []
             }
         },
         methods: {
@@ -187,11 +221,41 @@
             getClientListData(){
                 this.$http.get('/clients', { params: {page: 1, limits: 10000}}).then( response => {
                     this.clients = response.data.data; // 列表数据
-                    console.log(this.clients);
                 });
             },
             getListIndex(index){
                 return ((this.pageData.current_page - 1) * this.pageData.per_page) + index + 1;
+            },
+            // 获取人选列表
+            getCandidateListData() {
+                this.$http.get('/candidates', {
+                    params: {
+                        page: 1,
+                        limits: 10000
+                    }
+                }).then( response => {
+                    this.candidateList = this.handleFormatCandidateListData(response.data.data); // 列表数据
+                    console.log(this.candidateList);
+                });
+            },
+            // 整理人选列表
+            handleFormatCandidateListData(data) {
+                let container = [];
+                if (data.length > 0){
+                    data.forEach( item => {
+                        let label = item.name_mobile;
+                        item.current_job && (label += `-${item.current_job}`);
+                        item.current_company && (label += `-${item.current_company}`);
+                        item.education && (label += `-${item.education}`);
+                        item.school && (label += `-${item.school}`);
+
+                        container.push({
+                            value: item.id,
+                            label: label
+                        });
+                    })
+                }
+                return container;
             },
             handlePageChange(page){
                 this.listQuery.page = page;
@@ -207,7 +271,6 @@
             },
             // 新增客户提交
             handleSubmit (name) {
-                console.log(this.formValidate);
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         //发送提交请求
@@ -308,6 +371,38 @@
                     ]);
                 }
                 return content;
+            },
+            // 推荐职位提交
+            handleRecommendSubmit(name){
+                console.log(this.recommendValidate);
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        //发送提交请求
+                        this.$http.post('/recommends', this.recommendValidate).then( response => {
+                            this.$Message.success('添加成功');
+                            this.recommendModelLoading = false; //加载恢复
+                            this.recommendModel = false;       // 关闭弹窗
+                            // 数据清空
+                            this.$refs[name].resetFields();
+                            // 重新请求表单
+                            this.listQuery.page = 1;
+                            this.getListData();
+                        }).catch( response => {
+                            this.recommendModelLoading = false;
+                        })
+                    } else {
+                        this.recommendModelLoading = false;
+                    }
+                })
+            },
+            // 展示推荐弹窗
+            showRecommendModel(job_id){
+                this.recommendModel = true;
+                this.recommendValidate.job_id = job_id;
+            },
+            // 推荐弹窗选择取消
+            handleRecommendCancel(name){
+                this.$refs[name].resetFields();
             }
         }
     }

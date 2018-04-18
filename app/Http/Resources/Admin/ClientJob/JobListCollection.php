@@ -22,7 +22,8 @@ class JobListCollection extends ResourceCollection
                     'name' => $item['name'],
                     'status' => $item['status'],
                     'client_name' => data_get($item, 'client.name'),
-                    'created_at' => $item['created_at']
+                    'created_at' => $item['created_at'],
+                    'recommend_number' => $item['recommend_number']
                 ];
             }, $data);
         });

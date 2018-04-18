@@ -9,6 +9,8 @@ class ClientJob extends Model
 {
     protected $guarded = []; // 批量赋值黑名单
 
+    // 追加字段
+    protected $appends = ['recommend_number'];
 
     /**
      * 与客户关联
@@ -38,5 +40,10 @@ class ClientJob extends Model
     public function scopeMine($query)
     {
         return $query->where('user_id', Auth::id());
+    }
+
+    public function getRecommendNumberAttribute()
+    {
+        return Recommend::where('job_id', $this->attributes['id'])->count();
     }
 }

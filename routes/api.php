@@ -41,6 +41,9 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 
         // 人选管理
         Route::resource('candidates', 'CandidateController');
+
+        // 推荐管理
+        Route::resource('recommends', 'RecommendController');
     });
 
 

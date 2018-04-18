@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Auth;
 
 trait Permission
 {
@@ -12,6 +13,16 @@ trait Permission
      */
     public function isMine()
     {
-        return $this->attributes['user_id'] == \Auth::id();
+        return $this->attributes['user_id'] == Auth::id();
+    }
+
+    /**
+     * 当前用户所有 查询作用域
+     * @param $query
+     * @return mixed
+     */
+    public function scopeMine($query)
+    {
+        return $query->where('user_id', Auth::id());
     }
 }

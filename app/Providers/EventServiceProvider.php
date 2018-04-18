@@ -13,17 +13,20 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\JobCreated' => [
+        'App\Events\JobCreated' => [    // 职位添加
             'App\Listeners\JobCreatedRecord',
         ],
-        'App\Events\JobMarkSuccess' => [
+        'App\Events\JobMarkSuccess' => [    // 职位标记成功
             'App\Listeners\JobMarkSuccessRecord',
         ],
-        'App\Events\JobMarkFail' => [
+        'App\Events\JobMarkFail' => [   // 职位标记失败
             'App\Listeners\JobMarkFailRecord',
         ],
-        'App\Events\JobMarkClose' => [
+        'App\Events\JobMarkClose' => [  // 职位标记关闭
             'App\Listeners\JobMarkCloseRecord',
+        ],
+        'App\Events\RecommendCreated' => [  // 推荐添加
+            'App\Listeners\RecommendCreatedRecord',
         ],
     ];
 

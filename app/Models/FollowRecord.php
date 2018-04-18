@@ -17,4 +17,5 @@ class FollowRecord extends Model
     const TYPE_JOB_MARK_CLOSE = 7;  // 职位标记为关闭
 
     protected $guarded = [];
+
 }
