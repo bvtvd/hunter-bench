@@ -82,6 +82,7 @@ class CandidateController extends Controller
      * @apiGroup Candidates
      * @apiVersion 1.0.0
      *
+     *
      */
     public function show(Candidate $candidate)
     {
@@ -100,30 +101,48 @@ class CandidateController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @api {put} /candidates/:id    修改人选信息
+     * @apiName  修改人选信息
+     * @apiDescription  修改人选信息
+     * @apiGroup Candidates
+     * @apiVersion 1.0.0
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @apiParam {String}   name                    姓名
+     * @apiParam {String}   mobile                  手机号码
+     * @apiParam {String}   [current_company]       公司
+     * @apiParam {String}   [current_job]           职位
+     * @apiParam {String}   [education]             最高学历
+     * @apiParam {String}   [graduation_at]         毕业时间
+     * @apiParam {String}   [school]                毕业院校
+     * @apiParam {Int}      [status]                状态
+     * @apiParam {string}   [remark]                备注
      */
     public function update(Request $request, Candidate $candidate)
     {
-        if($candidate->user_id != Auth::id()) return $this->responseFail('没有修改权限');
+        if($candidate->isMine()){
+            $data = $request->only(['name', 'mobile', 'current_company', 'current_job', 'education', 'graduation_at', 'school', 'remark', 'status']);
 
-        $data = $request->only(['name', 'mobile', 'current_company', 'current_job', 'education', 'graduation_at', 'school', 'remark', 'status']);
-
-        $candidate->update($data);
-        return $this->responseSuccess();
+            $candidate->update($data);
+            return $this->responseSuccess();
+        }
+        return $this->responseFail('没有修改权限');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @api {delete} /candidates/:id    删除人选
+     * @apiName  删除人选
+     * @apiDescription  删除人选
+     * @apiGroup Candidates
+     * @apiVersion 1.0.0
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
      */
-    public function destroy($id)
+    public function destroy(Candidate $candidate)
     {
-        //
+        if($candidate->isMine()){
+            $candidate->delete();
+            return $this->responseSuccess();
+        }
+        return $this->responseFail('没有删除权限');
     }
 }

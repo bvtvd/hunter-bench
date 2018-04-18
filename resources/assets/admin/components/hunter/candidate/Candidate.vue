@@ -57,6 +57,21 @@
                 </Form>
             </div>
         </Modal>
+
+        <!--删除确认框-->
+        <Modal v-model="deleteModel" width="360">
+            <p slot="header" style="color:#f60;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>删除确认</span>
+            </p>
+            <div style="text-align:center">
+                <p>此操作不可逆, 人选删除之后不能恢复</p>
+                <p>确认删除吗?</p>
+            </div>
+            <div slot="footer">
+                <Button type="error" size="large" long :loading="deleteModelLoading" @click="handleDelete">删除</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -70,6 +85,9 @@
             return {
                 addModel: false,
                 addModelLoading: true,
+                deleteModel: false,
+                deleteModelLoading: false,
+                delete_id: null,
                 formValidate: {
                     name: '',
                     mobile: '',
@@ -159,7 +177,22 @@
                                             this.goCandidateDetail(params.row.id);
                                         }
                                     }
-                                }, '详情')
+                                }, '详情'),
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    },
+                                    style: {
+                                        color: '#ed3f14'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            // 删除提示
+                                            this.showDeleteModel(params.row.id);
+                                        }
+                                    }
+                                }, '删除')
                             ]);
                         }
                     }
@@ -201,9 +234,9 @@
                             this.addModel = false;       // 关闭弹窗
                             // 数据清空
                             this.$refs['formValidate'].resetFields();
-                            // 重新请求表单
-                            // this.listQuery.page = 1;
-                            // this.getListData();
+                            //重新请求表单
+                            this.listQuery.page = 1;
+                            this.getListData();
                         }).catch( response => {
                             this.addModelLoading = false;
                         })
@@ -246,6 +279,20 @@
                     });
                 }
                 return content;
+            },
+            // 删除确认弹窗
+            showDeleteModel(id) {
+                this.deleteModel = true;
+                this.delete_id = id;
+            },
+            // 删除提交
+            handleDelete(){
+                this.deleteModel = false;
+                this.$http.delete(`/candidates/${this.delete_id}`).then( response => {
+                    this.$Message.success('删除成功');
+                    this.getListData();
+                })
+
             }
         }
     }

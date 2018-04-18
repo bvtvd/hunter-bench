@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Permission;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
 {
+    use Permission;
+
     protected $guarded = [];    // 批量赋值黑名单
 
     /**
@@ -18,5 +21,7 @@ class Candidate extends Model
     {
         $this->attributes['graduation_at'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
     }
+
+
 
 }
