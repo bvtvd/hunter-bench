@@ -26,7 +26,8 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\JobMarkCloseRecord',
         ],
         'App\Events\RecommendCreated' => [  // 推荐添加
-            'App\Listeners\RecommendCreatedRecord',
+            'App\Listeners\RecommendCreatedRecord', // 添加跟进记录
+            'App\Listeners\JobStatusMarkAsRecommended', // 修改职位状态(改为以推荐)
         ],
     ];
 

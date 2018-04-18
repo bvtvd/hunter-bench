@@ -7,6 +7,13 @@ use Auth;
 
 class ClientJob extends Model
 {
+    const STATUS_SEARCHING = 1;
+    const STATUS_RECOMMENDED = 2;
+    const STATUS_FAILED = 3;
+    const STATUS_SUCCESS = 4;
+    const STATUS_CLOSED = 5;
+
+
     protected $guarded = []; // 批量赋值黑名单
 
     // 追加字段
