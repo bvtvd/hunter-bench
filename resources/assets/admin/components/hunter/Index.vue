@@ -12,20 +12,19 @@
                     <MenuItem name="client">
                         <template>
                             <Icon type="social-yen"></Icon>
-                            <span @click="">客户管理</span>
+                            客户管理
                         </template>
                     </MenuItem>
                     <MenuItem name="candidate">
                         <template>
                             <Icon type="ios-people"></Icon>
-                            <span @click=""></span>
                             人选管理
                         </template>
                     </MenuItem>
                     <MenuItem name="job">
                         <template>
                             <Icon type="briefcase"></Icon>
-                            <span @click="">职位管理</span>
+                            职位管理
                         </template>
                     </MenuItem>
                 </Menu>

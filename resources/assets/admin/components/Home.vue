@@ -73,6 +73,8 @@
             console.log('Home');
             this.setContentMinHeight()
             this.lightCurrentMenu();
+            this.setEchoAuthorization();
+            this.setBroadcast();
         },
         data() {
             return {
@@ -109,6 +111,22 @@
             lightCurrentMenu(){
                 this.activeName = this.getFirstRouteName();
             },
+            // 设置echo 认证请求token
+            setEchoAuthorization() {
+                this.$echo.options.auth.headers.Authorization = 'Bearer ' + this.$auth.token();
+            },
+            // 设置广播监听
+            setBroadcast() {
+                // 监听私人频道
+                this.$echo.private(`App.User.${this.$auth.user().id}`)
+                    .notification((notification) => {   // 监听服务端通知
+                        this.$Notice.open({
+                            title: notification.title,
+                            desc: notification.content,
+                            duration: 0
+                        });
+                    });
+            }
         }
     }
 </script>

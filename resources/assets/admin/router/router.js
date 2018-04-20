@@ -1,10 +1,3 @@
-// import Home from '../components/Home.vue';
-// import Login from '../components/Login.vue';
-// import HunterIndex from '../components/hunter/Index';
-// const Home = () => import('../components/Home.vue')
-// const Login = () => import('../components/Login.vue')
-// const HunterIndex = () => import('../components/hunter/Index')
-
 export default {
     routes: [
         {
@@ -19,12 +12,20 @@ export default {
                 {
                     path: '/hunter',
                     name: 'hunter.index',
-                    redirect: { name: 'hunter.client' },    // 先重定向都客户列表, 后面改为我的推荐
+                    redirect: { name: 'hunter.recommend' },    // 先重定向都客户列表, 后面改为我的推荐
                     component: () => import('../components/hunter/Index'),
                     meta: {
                         title: '猎场.首页'
                     },
                     children: [
+                        {
+                            path: 'recommend',
+                            name: 'hunter.recommend',
+                            meta: {
+                                title: '猎场.我的推荐'
+                            },
+                            component: () => import('../components/hunter/recommend/Recommend'),
+                        },
                         {
                             path: 'client',
                             name: 'hunter.client',

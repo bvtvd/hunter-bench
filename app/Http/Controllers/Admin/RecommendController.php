@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\RecommendCreated;
 use App\Http\Requests\Admin\RecommendStoreRequest;
+use App\Http\Resources\Admin\Recommend\RecommendListCollection;
 use App\Models\Candidate;
 use App\Models\Recommend;
+use App\Notifications\Admin\RecommendRemind;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -13,13 +16,25 @@ use Auth;
 class RecommendController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @api {get} /recommends    推荐列表
+     * @apiName  推荐列表
+     * @apiDescription  推荐列表
+     * @apiGroup Recommends
+     * @apiVersion 1.0.0
      *
-     * @return \Illuminate\Http\Response
+     * @apiParam {Int}   [page]     跳转页数
+     * @apiParam {Int} [limits]    每页条数
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // 查询当前用户做过的推荐
+        $recommends = Recommend::mine()
+            ->candidateInfo()
+            ->jobInfo()
+            ->orderBy('updated_at', 'desc')
+            ->paginate($request->input('limits', 10));
+//        return $recommends;
+        return new RecommendListCollection($recommends);
     }
 
     /**
@@ -114,4 +129,13 @@ class RecommendController extends Controller
     {
         //
     }
+
+    // 设置提醒
+    public function remind(Request $request)
+    {
+        Auth::user()->notify((new RecommendRemind($request->all()))->delay(Carbon::parse($request->input('time'))));
+        return $this->responseSuccess();
+    }
+
+
 }

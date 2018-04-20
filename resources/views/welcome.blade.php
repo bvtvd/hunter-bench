@@ -13,8 +13,9 @@
     <body>
         <div class="container">
             <div id="app"></div>
-
         </div>
+
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
         <script src="/js/app.js"></script>
     </body>
 </html>

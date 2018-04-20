@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>Laravel</title>
+        <title>Bench - seizeone.site</title>
 
         <!-- Fonts -->
 
@@ -14,6 +14,7 @@
             <div id="app"></div>
 
         </div>
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
         <script src="/admin/js/app.js"></script>
     </body>
 </html>

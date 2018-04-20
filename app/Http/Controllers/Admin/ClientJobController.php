@@ -16,9 +16,14 @@ use Auth;
 class ClientJobController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @api {get} /jobs    职位列表
+     * @apiName  职位列表
+     * @apiDescription  职位列表
+     * @apiGroup Jobs
+     * @apiVersion 1.0.0
      *
-     * @return \Illuminate\Http\Response
+     * @apiParam {Int}   [page]     跳转页数
+     * @apiParam {Int} [limits]    每页条数
      */
     public function index(Request $request)
     {

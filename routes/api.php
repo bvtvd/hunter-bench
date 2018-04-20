@@ -43,6 +43,11 @@ Route::group(['middleware' => 'jwt.auth'], function(){
         Route::resource('candidates', 'CandidateController');
 
         // 推荐管理
+        Route::group(['prefix' => 'recommends'], function(){
+            // 设置提醒
+            Route::post('remind', 'RecommendController@remind');
+
+        });
         Route::resource('recommends', 'RecommendController');
     });
 

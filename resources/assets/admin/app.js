@@ -5,14 +5,34 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router/router';
 import iView from 'iview';
+import Echo from 'laravel-echo';
 import 'iview/dist/styles/iview.css'
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(iView);
 
+// 设置ECHO
+Vue.prototype.$echo = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001',
+    auth: {
+        headers: {}
+    }
+})
+
 axios.defaults.baseURL = 'http://apidemo.test/api';
-Vue.router = new VueRouter(router)
+Vue.router = new VueRouter(router);
+
+// 加载进度条
+Vue.router.beforeEach((to, from, next) => {
+    iView.LoadingBar.start();
+    next();
+});
+Vue.router.afterEach(route => {
+    iView.LoadingBar.finish();
+});
+
 
 Vue.use(require('@websanova/vue-auth'), {
     auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
