@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\RecommendStoreRequest;
 use App\Http\Resources\Admin\Recommend\RecommendListCollection;
 use App\Models\Candidate;
 use App\Models\Recommend;
+use App\Models\RecommendNotificationRecord;
 use App\Notifications\Admin\RecommendRemind;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -130,10 +131,33 @@ class RecommendController extends Controller
         //
     }
 
-    // 设置提醒
+    /**
+     * @api {post} /recommends/remind    设置推荐提醒
+     * @apiName  设置推荐提醒
+     * @apiDescription  设置推荐提醒
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     ** @apiParam {Int}     recommend_id           推荐id
+     * @apiParam {Datetime}   time                 提醒时间
+     * @apiParam {String}   title                  标题
+     * @apiParam {String}   content                内容
+     */
     public function remind(Request $request)
     {
-        Auth::user()->notify((new RecommendRemind($request->all()))->delay(Carbon::parse($request->input('time'))));
+        $data = $request->all();
+        $record = RecommendNotificationRecord::create([
+            'user_id' => Auth::id(),
+            'recommend_id' => $data['recommend_id'],
+            'notice_at' => $data['time'],
+            'status' => 0,
+            'title' => $data['title'],
+            'content' => $data['content']
+        ]);
+
+        $data['record_id'] = $record->id;
+
+        Auth::user()->notify((new RecommendRemind($data))->delay(Carbon::parse($request->input('time'))));
         return $this->responseSuccess();
     }
 

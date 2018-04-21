@@ -20,8 +20,8 @@ class CreateRecommendNoticesTable extends Migration
             $table->timestamp('notice_at')->comment('提醒时间');
             $table->tinyInteger('status')->nullable()->default(0)->comment('0. 未提醒  1. 已提醒');
             $table->string('title')->nullable()->comment('标题');
-            $table->string('content', 500)->comment('内容');
-            $table->string('remark', 3000)->comment('备注');
+            $table->string('content', 500)->nullable()->comment('内容');
+            $table->string('remark', 3000)->nullable()->comment('备注');
             $table->timestamps();
         });
     }

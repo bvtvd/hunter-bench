@@ -29,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\RecommendCreatedRecord', // 添加跟进记录
             'App\Listeners\JobStatusMarkAsRecommended', // 修改职位状态(改为以推荐)
         ],
+        'Illuminate\Notifications\Events\NotificationSent' => [ // 通知发送事件
+            'App\Listeners\LogNotification',
+        ],
     ];
 
     /**

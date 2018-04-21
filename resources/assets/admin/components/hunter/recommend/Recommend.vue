@@ -178,6 +178,7 @@
                     title: '',
                     time: '',
                     content: '',
+                    recommend_id: '',
                 },
                 notificationRuleValidate: {
                     title: [
@@ -315,8 +316,9 @@
                 return content;
             },
             showNotificationModel(item) {
-                this.notificationValidate.title = '面试提醒',
-                this.notificationValidate.content = `提醒 ${item.candidate_name_mobile} 3 个小时之后去 ${item.client} 面试 ${item.job_name}`,
+                this.notificationValidate.title = '面试提醒';
+                this.notificationValidate.content = `提醒 ${item.candidate_name_mobile} 3 个小时之后去 ${item.client} 面试 ${item.job_name}`;
+                this.notificationValidate.recommend_id = item.id;
 
                 this.notificationModel = true;
             },
