@@ -5,8 +5,10 @@ import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router/router';
 import iView from 'iview';
+// import iView from 'iView';
 import Echo from 'laravel-echo';
 import 'iview/dist/styles/iview.css'
+// const iView = require('iView');
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);

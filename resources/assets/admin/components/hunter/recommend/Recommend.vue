@@ -157,6 +157,13 @@
                                     style: {
                                         color: '#19be6b'
                                     },
+                                    on: {
+                                        click: () => {
+                                            //
+
+
+                                        }
+                                    }
                                 }, '面试'),
                                 h('Button', {
                                     props: {

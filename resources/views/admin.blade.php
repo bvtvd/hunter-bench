@@ -15,6 +15,7 @@
 
         </div>
         <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
+        {{--<script src="//unpkg.com/iview/dist/iview.min.js"></script>--}}
         <script src="/admin/js/app.js"></script>
     </body>
 </html>
