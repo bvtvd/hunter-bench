@@ -27,6 +27,14 @@ export default {
                             component: () => import('../components/hunter/recommend/Recommend'),
                         },
                         {
+                            path: 'recommend/:id',
+                            name: 'hunter.recommend.detail',
+                            meta: {
+                                title: '猎场.推荐详情'
+                            },
+                            component: () => import('../components/hunter/recommend/Detail'),
+                        },
+                        {
                             path: 'client',
                             name: 'hunter.client',
                             meta: {

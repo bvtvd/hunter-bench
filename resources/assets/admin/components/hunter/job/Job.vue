@@ -147,6 +147,21 @@
                                         size: 'small'
                                     },
                                     style: {
+                                        color: '#2d8cf0'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            // 跳转到详情页
+                                            this.goClientDetail(params.row.id);
+                                        }
+                                    }
+                                }, '详情'),
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small'
+                                    },
+                                    style: {
                                         color: '#19be6b'
                                     },
                                     on: {
@@ -166,21 +181,6 @@
                                         }
                                     }
                                 }),
-                                h('Button', {
-                                    props: {
-                                        type: 'text',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        color: '#19be6b'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            // 跳转到详情页
-                                            this.goClientDetail(params.row.id);
-                                        }
-                                    }
-                                }, '详情'),
                                 h('Button', {
                                     props: {
                                         type: 'text',

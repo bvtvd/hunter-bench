@@ -32,6 +32,15 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Notifications\Events\NotificationSent' => [ // 通知发送事件
             'App\Listeners\LogNotification',
         ],
+        'App\Events\RecommendMarkFail' => [   // 推荐标记失败
+            'App\Listeners\RecommendMarkFailRecord',
+        ],
+        'App\Events\RecommendMarkSuccess' => [   // 推荐标记成功
+            'App\Listeners\RecommendMarkSuccessRecord',
+        ],
+        'App\Events\RecommendMarkClose' => [   // 推荐标记关闭
+            'App\Listeners\RecommendMarkCloseRecord',
+        ],
     ];
 
     /**

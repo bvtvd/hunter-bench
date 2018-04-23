@@ -15,6 +15,12 @@ class Recommend extends Model
     const STATUS_SUCCESS = 3;   // 成功
     const STATUS_CLOSED = 4;    // 关闭
 
+    public static $status = [
+        1 => '推荐中',
+        2 => '失败',
+        3 => '成功',
+        4 => '已关闭'
+    ];
 
     protected $guarded = [];    // 批量赋值黑名单
 

@@ -143,7 +143,7 @@ class ClientJobController extends Controller
     public function markFail(Request $request, ClientJob $job)
     {
         if($job && $job->user_id == Auth::id()){
-            $job->update(['status' => 3]);  // 改为成功状态
+            $job->update(['status' => 3]);  // 改为失败状态
             # 触发失败事件
             event(new JobMarkFail(Auth::user(), $job));
 
@@ -163,7 +163,7 @@ class ClientJobController extends Controller
     public function markClose(Request $request, ClientJob $job)
     {
         if($job && $job->user_id == Auth::id()){
-            $job->update(['status' => 5]);  // 改为成功状态
+            $job->update(['status' => 5]);  // 改为关闭状态
             #  触发关闭事件
             event(new JobMarkClose(Auth::user(), $job));
 

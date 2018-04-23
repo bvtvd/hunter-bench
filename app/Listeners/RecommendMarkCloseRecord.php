@@ -2,12 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Events\RecommendCreated;
+use App\Events\RecommendMarkClose;
 use App\Models\FollowRecord;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RecommendCreatedRecord
+class RecommendMarkCloseRecord
 {
     /**
      * Create the event listener.
@@ -22,18 +22,18 @@ class RecommendCreatedRecord
     /**
      * Handle the event.
      *
-     * @param  RecommendCreated  $event
+     * @param  RecommendMarkClose  $event
      * @return void
      */
-    public function handle(RecommendCreated $event)
+    public function handle(RecommendMarkClose $event)
     {
         FollowRecord::create([
             'user_id' => $event->user->id,
-            'job_id' => $event->job->id,
+            'job_id' => $event->recommend->job_id,
             'recommend_id' => $event->recommend->id,
-            'candidate_id' => $event->candidate->id,
-            'type' => FollowRecord::TYPE_RECOMMEND,
-            'remark' => "{$event->job->name}:推荐了{$event->candidate->name}({$event->candidate->mobile})",
+            'candidate_id' => $event->recommend->candidate_id,
+            'type' => FollowRecord::TYPE_RECOMMEND_CLOSE,
+            'remark' => '推荐关闭',
         ]);
     }
 }

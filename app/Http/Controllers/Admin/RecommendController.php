@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\RecommendCreated;
+use App\Events\RecommendMarkClose;
+use App\Events\RecommendMarkFail;
+use App\Events\RecommendMarkSuccess;
 use App\Http\Requests\Admin\RecommendStoreRequest;
+use App\Http\Resources\Admin\Recommend\RecommendDetailResource;
 use App\Http\Resources\Admin\Recommend\RecommendListCollection;
 use App\Models\Candidate;
+use App\Models\FollowRecord;
 use App\Models\Recommend;
 use App\Models\RecommendNotificationRecord;
 use App\Notifications\Admin\RecommendRemind;
@@ -94,7 +99,10 @@ class RecommendController extends Controller
      */
     public function show($id)
     {
-        //
+        $recommend = Recommend::jobInfo()
+            ->candidateInfo()
+            ->find($id);
+        return new RecommendDetailResource($recommend);
     }
 
     /**
@@ -161,5 +169,117 @@ class RecommendController extends Controller
         return $this->responseSuccess();
     }
 
+    /**
+     * @api {post} /recommends/interview    确认面试
+     * @apiName  确认面试
+     * @apiDescription  确认面试
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Int}     recommend_id           推荐id
+     * @apiParam {Int}      job_id                 职位id
+     * @apiParam {Int}      candidate_id           人选id
+     */
+    public function interview(Request $request)
+    {
+        $data = $request->only(['job_id', 'recommend_id', 'candidate_id']);
+        $candidate = Candidate::find($data['candidate_id']);
+        $data['user_id'] = Auth::id();
+        $data['type'] = FollowRecord::TYPE_INTERVIEW;
+        $data['remark'] = "{$candidate->name}({$candidate->mobile})参加了该职位的面试";
+        FollowRecord::create($data);
+        return $this->responseSuccess();
+    }
 
+
+    /**
+     * @api {put} /recommends/mark/success/:id    标记推荐为成功
+     * @apiName  标记推荐为成功
+     * @apiDescription  标记推荐为成功
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markSuccess(Request $request, Recommend $recommend)
+    {
+        if($recommend && $recommend->user_id == Auth::id()){
+            $recommend->update(['status' => 3]);  // 改为成功状态
+            # 触发成功事件
+            event(new RecommendMarkSuccess(Auth::user(), $recommend));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
+    }
+
+    /**
+     * @api {put} /recommends/mark/fail/:id    标记推荐为失败
+     * @apiName  标记推荐为失败
+     * @apiDescription  标记推荐为失败
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markFail(Request $request, Recommend $recommend)
+    {
+        if($recommend && $recommend->user_id == Auth::id()){
+            $recommend->update(['status' => 2]);  // 改为成功状态
+            # 触发失败事件
+            event(new RecommendMarkFail(Auth::user(), $recommend));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
+    }
+
+    /**
+     * @api {put} /recommends/mark/close/:id    标记推荐为关闭
+     * @apiName  标记推荐为关闭
+     * @apiDescription  标记推荐为关闭
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     */
+    public function markClose(Request $request, Recommend $recommend)
+    {
+        if($recommend && $recommend->user_id == Auth::id()){
+            $recommend->update(['status' => 4]);  // 改为成功状态
+            #  触发关闭事件
+            event(new RecommendMarkClose(Auth::user(), $recommend));
+
+            return $this->responseSuccess();
+        }
+        return $this->responseFail();
+    }
+
+    /**
+     * @api {put} /recommends/lift    推荐的一生
+     * @apiName  推荐的一生
+     * @apiDescription  推荐的一生
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Int}     id           推荐id
+     */
+    public function life(Request $request)
+    {
+        $records = FollowRecord::where('recommend_id', $request->id)->orderBy('created_at', 'desc')->get();
+
+        return $records;
+    }
+
+    /**
+     * @api {get} /recommends/remind    获取提醒列表
+     * @apiName  获取提醒列表
+     * @apiDescription  获取提醒列表
+     * @apiGroup Recommend
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Int}     id           推荐id
+     */
+    public function getRemindList(Request $request)
+    {
+        $records = RecommendNotificationRecord::where('recommend_id', $request->id)->get();
+        return $records;
+    }
 }

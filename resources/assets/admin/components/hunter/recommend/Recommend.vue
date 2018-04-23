@@ -15,32 +15,6 @@
             </Tabs>
         </Row>
 
-        <!--新增客户弹窗-->
-        <Modal
-                title="新增客户"
-                v-model="addModel"
-                class-name="vertical-center-modal"
-                ok-text="提交"
-                :loading="addModelLoading"
-                @on-ok="handleSubmit('formValidate')">
-            <div>
-                <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-                    <FormItem label="客户名称" prop="name">
-                        <Input v-model="formValidate.name" placeholder="客户公司名称"></Input>
-                    </FormItem>
-                    <FormItem label="备注" prop="remark">
-                        <Input v-model="formValidate.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
-                    </FormItem>
-                    <FormItem>
-                        <Row>
-                            <Col span="12">
-                                <Button type="dashed" long @click="handleAddClientJobs" icon="plus-round">添加职位</Button>
-                            </Col>
-                        </Row>
-                    </FormItem>
-                </Form>
-            </div>
-        </Modal>
 
         <!--设置提醒弹窗-->
         <Modal
@@ -51,6 +25,7 @@
                 :loading="notificationModelLoading"
                 @on-ok="handleNotificationSubmit('notificationValidate')">
             <div>
+                <Alert show-icon>请根据自己的需要自定义修改提醒标题和内容</Alert>
                 <Form ref="notificationValidate" :model="notificationValidate" :rules="notificationRuleValidate" :label-width="80">
                     <FormItem label="标题" prop="title">
                         <Input v-model="notificationValidate.title" placeholder="面试提醒"></Input>
@@ -64,10 +39,26 @@
                 </Form>
             </div>
         </Modal>
+
+        <!--面试弹窗-->
+        <Modal v-model="interviewModel" width="360">
+            <p slot="header" style="color:#2d8cf0;text-align:center">
+                <Icon type="information-circled"></Icon>
+                <span>面试确认</span>
+            </p>
+            <div style="text-align:center">
+                <p>人选是否已经参加过该职位的面试了?</p>
+            </div>
+            <div slot="footer">
+                <Button type="primary" size="large" long :loading="interviewModelLoading" @click="handleInterviewConfirm">是的</Button>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
+    import MarkPoptip  from './components/MarkPoptip';
+
     export default {
         beforeCreate(){
         },
@@ -129,9 +120,24 @@
                     },
                     {
                         title: '操作',
-                        minWidth: 200,
+                        minWidth: 250,
                         render: (h, params) => {
                             return h('div', [
+                                h('Button', {
+                                    props: {
+                                        type: 'text',
+                                        size: 'small',
+                                    },
+                                    style: {
+                                        color: '#19be6b'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            // 设置提醒弹窗
+                                            this.goRecommendDetail(params.row.id)
+                                        }
+                                    }
+                                }, '详情'),
                                 h('Button', {
                                     props: {
                                         type: 'text',
@@ -145,7 +151,6 @@
                                         click: () => {
                                             // 设置提醒弹窗
                                             this.showNotificationModel(params.row);
-
                                         }
                                     }
                                 }, '设置提醒'),
@@ -159,21 +164,21 @@
                                     },
                                     on: {
                                         click: () => {
-                                            //
-
-
+                                            // 展示面试弹窗
+                                            this.showInterviewModel(params.row);
                                         }
                                     }
                                 }, '面试'),
-                                h('Button', {
+                                h(MarkPoptip, {
                                     props: {
-                                        type: 'text',
-                                        size: 'small'
+                                        recommend_id: params.row.id
                                     },
-                                    style: {
-                                        color: '#ff9900'
-                                    },
-                                }, 'mark')
+                                    on: {
+                                        statusUpdated: () => {
+                                            this.getListData();
+                                        }
+                                    }
+                                }),
                             ]);
                         }
                     }
@@ -203,6 +208,13 @@
                         return date && date.valueOf() < Date.now() - 86400000;
                     }
                 },
+                interviewModel: false,
+                interviewModelLoading: false,
+                interviewValidate: {
+                    recommend_id: 0,
+                    job_id: 0,
+                    candidate_id: 0,
+                }
             }
         },
         methods: {
@@ -250,10 +262,6 @@
                         this.addModelLoading = false;
                     }
                 })
-            },
-            // 顺便添加客户职位
-            handleAddClientJobs(){
-
             },
             // 跳转到客户详情页
             goClientDetail(id) {
@@ -359,7 +367,33 @@
                     }
                 })
             },
-        }
+            // 展示面试弹窗
+            showInterviewModel(item){
+                this.interviewModel = true;
+                this.interviewValidate.recommend_id = item.id;
+                this.interviewValidate.job_id = item.job_id;
+                this.interviewValidate.candidate_id = item.candidate_id;
+            },
+            handleInterviewConfirm(){
+                this.interviewModelLoading = true; //加载
+                this.$http.post('/recommends/interview', this.interviewValidate).then( response => {
+                    this.$Message.success('操作成功');
+
+                    this.interviewModelLoading = false; //加载恢复
+                    this.interviewModel = false;       // 关闭弹窗
+                }).catch( () => {
+                    this.interviewModelLoading = false; //加载恢复
+                })
+            },
+            // 去推荐详情页
+            goRecommendDetail(id) {
+                this.$router.push({
+                    name: 'hunter.recommend.detail',
+                    params: { id: id}
+                })
+            }
+        },
+
     }
 </script>
 

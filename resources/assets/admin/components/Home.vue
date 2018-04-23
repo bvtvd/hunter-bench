@@ -26,7 +26,7 @@
                             </MenuItem>
                             <MenuItem name="5">
                                 <Dropdown>
-                                    <span>昵称</span>&nbsp;
+                                    <span>{{$auth.user().name}}</span>&nbsp;
                                     <Avatar :src="$auth.user().avatar" v-if="$auth.user().avatar"/>
                                     <Avatar icon="person" style="background-color: #87d068" v-else/>
                                     <DropdownMenu slot="list">
@@ -59,7 +59,10 @@
                 </Card>
             </Content>
             <div ref="footer">
-                <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+                <Footer class="layout-footer-center">
+                    <p>Power by Hans</p>
+                    <p>&reg; seizeone.site</p>
+                </Footer>
             </div>
         </Layout>
     </div>
@@ -70,7 +73,6 @@
 
     export default {
         mounted(){
-            console.log('Home');
             this.setContentMinHeight()
             this.lightCurrentMenu();
             this.setEchoAuthorization();

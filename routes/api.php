@@ -46,6 +46,15 @@ Route::group(['middleware' => 'jwt.auth'], function(){
         Route::group(['prefix' => 'recommends'], function(){
             // 设置提醒
             Route::post('remind', 'RecommendController@remind');
+            // 确认面试
+            Route::post('interview', 'RecommendController@interview');
+            Route::put('mark/success/{recommend}', 'RecommendController@markSuccess');   // 标记为成功
+            Route::put('mark/fail/{recommend}', 'RecommendController@markFail'); // 标记为失败
+            Route::put('mark/close/{recommend}', 'RecommendController@markClose');  // 标记为关闭
+            // 推荐的一生
+            Route::get('life', 'RecommendController@life');
+            // 推荐提醒
+            Route::get('remind', 'RecommendController@getRemindList');
 
         });
         Route::resource('recommends', 'RecommendController');
