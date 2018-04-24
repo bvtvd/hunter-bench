@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"23036f3c94e7c61a1e4c","1":"827919d314edd9b8c35f","2":"9426010ed71a894719e4","3":"72f806e0a5a0dc1eb32e","4":"3c243bda5f32f2771aa7","5":"922fd12f68e707ead30d","6":"446dd853bc7a0379e5bc","7":"e3ad6f42126ed6a583d7","8":"d5a5c88ad3b1ca2c929d","9":"b71d1c4876ecef398fa5"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"11":"cabc21c5bf3c3ec78b85","12":"c677b4c73af1d2db6b24","13":"5401f37e3ce1f8ab1323","14":"725e5f51a5929d39cf05","15":"dc9bba08bc0ebee1b9d2","16":"0c5d683764e5b127e42f","17":"3b2fec9bab753ebc8447","18":"b25ba58e1bd760ef0af2","19":"c628e12df73397978be6","20":"31c0d486a57bcddee86f","21":"43f35b9c6b521d44aaac"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -16592,7 +16592,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 65));
+            return __webpack_require__.e/* import() */(19).then(__webpack_require__.bind(null, 65));
         },
         meta: {
             title: '首页',
@@ -16603,7 +16603,7 @@ if (false) {
             name: 'hunter.index',
             redirect: { name: 'hunter.recommend' }, // 先重定向都客户列表, 后面改为我的推荐
             component: function component() {
-                return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 66));
+                return __webpack_require__.e/* import() */(17).then(__webpack_require__.bind(null, 66));
             },
             meta: {
                 title: '猎场.首页'
@@ -16615,7 +16615,7 @@ if (false) {
                     title: '猎场.我的推荐'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 67));
+                    return __webpack_require__.e/* import() */(11).then(__webpack_require__.bind(null, 67));
                 }
             }, {
                 path: 'recommend/:id',
@@ -16624,7 +16624,7 @@ if (false) {
                     title: '猎场.推荐详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 68));
+                    return __webpack_require__.e/* import() */(13).then(__webpack_require__.bind(null, 68));
                 }
             }, {
                 path: 'client',
@@ -16633,7 +16633,7 @@ if (false) {
                     title: '猎场.客户列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 69));
+                    return __webpack_require__.e/* import() */(15).then(__webpack_require__.bind(null, 69));
                 }
             }, {
                 path: 'client/:id',
@@ -16642,7 +16642,7 @@ if (false) {
                     title: '猎场.客户详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 70));
+                    return __webpack_require__.e/* import() */(20).then(__webpack_require__.bind(null, 70));
                 }
             }, {
                 path: 'job',
@@ -16651,7 +16651,16 @@ if (false) {
                     title: '猎场.职位列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 71));
+                    return __webpack_require__.e/* import() */(12).then(__webpack_require__.bind(null, 71));
+                }
+            }, {
+                path: 'job/:id',
+                name: 'hunter.job.detail',
+                meta: {
+                    title: '猎场.职位详情'
+                },
+                component: function component() {
+                    return __webpack_require__.e/* import() */(14).then(__webpack_require__.bind(null, 121));
                 }
             }, {
                 path: 'candidate',
@@ -16660,7 +16669,7 @@ if (false) {
                     title: '猎场.人选管理'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 72));
+                    return __webpack_require__.e/* import() */(16).then(__webpack_require__.bind(null, 72));
                 }
             }, {
                 path: 'candidate/:id',
@@ -16669,7 +16678,7 @@ if (false) {
                     title: '猎场.人选详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 73));
+                    return __webpack_require__.e/* import() */(21).then(__webpack_require__.bind(null, 73));
                 }
             }]
         }]
@@ -16677,7 +16686,7 @@ if (false) {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 74));
+            return __webpack_require__.e/* import() */(18).then(__webpack_require__.bind(null, 74));
         },
         meta: {
             auth: false

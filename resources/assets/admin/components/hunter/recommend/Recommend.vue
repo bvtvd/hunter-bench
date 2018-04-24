@@ -1,6 +1,11 @@
 <template>
     <div>
         <Row>
+            <Alert show-icon>
+                <p>设置提醒功能会在您设置的提醒时间提醒你设置的内容, 目前支持邮件提醒和广播通知</p>
+                <p>人选去面试了之后, 请点击确认面试</p>
+                <p>点击mark 更新推荐的状态</p>
+            </Alert>
             <Tabs value="name1">
                 <TabPane label="我的推荐" name="name1">
                     <Table :columns="columns" :data="data" size="small"></Table>

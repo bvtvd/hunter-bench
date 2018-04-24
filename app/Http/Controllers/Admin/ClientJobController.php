@@ -7,8 +7,10 @@ use App\Events\JobMarkClose;
 use App\Events\JobMarkFail;
 use App\Events\JobMarkSuccess;
 use App\Http\Requests\Admin\JobStoreRequest;
+use App\Http\Resources\Admin\ClientJob\JobDetailResource;
 use App\Http\Resources\Admin\ClientJob\JobListCollection;
 use App\Models\ClientJob;
+use App\Models\FollowRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -68,14 +70,18 @@ class ClientJobController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @api {get} /jobs/:id    职位详情
+     * @apiName  职位详情
+     * @apiDescription  职位详情
+     * @apiGroup Client-Jobs
+     * @apiVersion 1.0.0
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $job = ClientJob::clientInfo()
+            ->find($id);
+        return new JobDetailResource($job);
     }
 
     /**
@@ -170,5 +176,21 @@ class ClientJobController extends Controller
             return $this->responseSuccess();
         }
         return $this->responseFail();
+    }
+
+    /**
+     * @api {get} /jobs/life    职位的一生
+     * @apiName  职位的一生
+     * @apiDescription  职位的一生
+     * @apiGroup Client-Jobs
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {Int}     id           职位id
+     */
+    public function life(Request $request)
+    {
+        $records = FollowRecord::where('job_id', $request->id)->orderBy('created_at', 'desc')->orderBy('id', 'desc')->get();
+
+        return $records;
     }
 }

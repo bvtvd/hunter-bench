@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@websanova/vue-auth": "^2.21.6-beta",
+        "countup": "^1.8.2",
         "iview": "^2.13.0",
         "laravel-echo": "^1.3.5",
         "less": "^3.0.1",

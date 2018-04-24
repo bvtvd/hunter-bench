@@ -33,7 +33,7 @@ class RecommendMarkCloseRecord
             'recommend_id' => $event->recommend->id,
             'candidate_id' => $event->recommend->candidate_id,
             'type' => FollowRecord::TYPE_RECOMMEND_CLOSE,
-            'remark' => '推荐关闭',
+            'remark' => "推荐关闭: {$event->recommend->candidate->name}({$event->recommend->candidate->mobile})",
         ]);
     }
 }

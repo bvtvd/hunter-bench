@@ -59,6 +59,14 @@ export default {
                             component: () => import('../components/hunter/job/Job'),
                         },
                         {
+                            path: 'job/:id',
+                            name: 'hunter.job.detail',
+                            meta: {
+                                title: '猎场.职位详情'
+                            },
+                            component: () => import('../components/hunter/job/Detail'),
+                        },
+                        {
                             path: 'candidate',
                             name: 'hunter.candidate',
                             meta: {

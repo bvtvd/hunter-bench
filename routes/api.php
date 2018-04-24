@@ -36,6 +36,8 @@ Route::group(['middleware' => 'jwt.auth'], function(){
             Route::put('mark/success/{job}', 'ClientJobController@markSuccess');   // 标记为成功
             Route::put('mark/fail/{job}', 'ClientJobController@markFail'); // 标记为失败
             Route::put('mark/close/{job}', 'ClientJobController@markClose');  // 标记为关闭
+            // 职位的一生
+            Route::get('life', 'ClientJobController@life');
         });
         Route::resource('jobs', 'ClientJobController');
 

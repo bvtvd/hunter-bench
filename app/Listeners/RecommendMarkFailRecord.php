@@ -33,7 +33,7 @@ class RecommendMarkFailRecord
             'recommend_id' => $event->recommend->id,
             'candidate_id' => $event->recommend->candidate_id,
             'type' => FollowRecord::TYPE_RECOMMEND_FAIL,
-            'remark' => '推荐失败',
+            'remark' => "推荐失败: {$event->recommend->candidate->name}({$event->recommend->candidate->mobile})",
         ]);
     }
 }

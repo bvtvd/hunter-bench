@@ -253,7 +253,7 @@ class RecommendController extends Controller
     }
 
     /**
-     * @api {put} /recommends/lift    推荐的一生
+     * @api {get} /recommends/life    推荐的一生
      * @apiName  推荐的一生
      * @apiDescription  推荐的一生
      * @apiGroup Recommend

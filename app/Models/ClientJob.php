@@ -13,11 +13,19 @@ class ClientJob extends Model
     const STATUS_SUCCESS = 4;
     const STATUS_CLOSED = 5;
 
-
     protected $guarded = []; // 批量赋值黑名单
 
     // 追加字段
     protected $appends = ['recommend_number'];
+
+    // 状态
+    public static $status = [
+        1 => '寻找中',
+        2 => '以推荐',
+        3 => '推荐失败',
+        4 => '推荐成功',
+        5 => '已关闭'
+    ];
 
     /**
      * 与客户关联

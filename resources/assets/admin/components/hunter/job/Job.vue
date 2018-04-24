@@ -1,6 +1,10 @@
 <template>
     <div>
         <Row>
+            <Alert show-icon>
+                <p>点击推荐选择人选可以给该职位推荐不同的人选</p>
+                <p>点击mark可以更改职位状态为成功或失败</p>
+            </Alert>
             <Tabs value="name1">
                 <TabPane label="职位管理" name="name1">
                     <Table :columns="columns" :data="data" size="small"></Table>
@@ -68,7 +72,6 @@
     export default {
         mounted() { // 优先级较低
             this.getListData();
-
             this.getClientListData();   // 获取客户列表
             this.getCandidateListData(); // 获取人选列表
         },
@@ -104,9 +107,7 @@
                 },
                 columns: [
                     {
-                        // type: 'index',
                         title: '#',
-                        // key: 'index',
                         render: (h, params) => {
                             return h('span', this.getListIndex(params.index));
                         }
@@ -152,7 +153,7 @@
                                     on: {
                                         click: () => {
                                             // 跳转到详情页
-                                            this.goClientDetail(params.row.id);
+                                            this.goJobDetail(params.row.id);
                                         }
                                     }
                                 }, '详情'),
@@ -181,15 +182,15 @@
                                         }
                                     }
                                 }),
-                                h('Button', {
-                                    props: {
-                                        type: 'text',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        color: '#ff9900'
-                                    },
-                                }, '修改')
+                                // h('Button', {
+                                //     props: {
+                                //         type: 'text',
+                                //         size: 'small'
+                                //     },
+                                //     style: {
+                                //         color: '#ff9900'
+                                //     },
+                                // }, '修改')
                             ]);
                         }
                     }
@@ -235,7 +236,6 @@
                     }
                 }).then( response => {
                     this.candidateList = this.handleFormatCandidateListData(response.data.data); // 列表数据
-                    console.log(this.candidateList);
                 });
             },
             // 整理人选列表
@@ -292,10 +292,10 @@
                     }
                 })
             },
-            // 跳转到客户详情页
-            goClientDetail(id) {
+            // 跳转到职位详情页
+            goJobDetail(id) {
                 this.$router.push({
-                    name: 'hunter.client.detail',
+                    name: 'hunter.job.detail',
                     params: { id: id },
                 })
             },
@@ -374,7 +374,6 @@
             },
             // 推荐职位提交
             handleRecommendSubmit(name){
-                console.log(this.recommendValidate);
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         //发送提交请求
