@@ -13,9 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+// 开放接口
+Route::post('mobile', 'CommonController@mobile');   // 添加手机号
+Route::get('mobile', 'CommonController@index');     // 获取手机号
+
+
+
 
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('logout', 'Auth\LoginController@logout');

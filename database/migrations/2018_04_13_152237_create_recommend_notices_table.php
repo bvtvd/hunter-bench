@@ -17,7 +17,7 @@ class CreateRecommendNoticesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->comment('录入者id');
             $table->unsignedInteger('recommend_id')->comment('推荐表id');
-            $table->timestamp('notice_at')->comment('提醒时间');
+            $table->timestamp('notice_at')->nullable()->comment('提醒时间');
             $table->tinyInteger('status')->nullable()->default(0)->comment('0. 未提醒  1. 已提醒');
             $table->string('title')->nullable()->comment('标题');
             $table->string('content', 500)->nullable()->comment('内容');
