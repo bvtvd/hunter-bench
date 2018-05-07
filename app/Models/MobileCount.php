@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class MobileCount extends Model
+class MobileCount extends BaseModel
 {
-    protected $guarded = [];
 }

@@ -3,6 +3,7 @@
 - with finished work record
 
 ##### 使用项目前先配置redis
+##### 运行数据迁移
 ##### 安装laravel-echo-server
 > 在项目根目录下
 ```

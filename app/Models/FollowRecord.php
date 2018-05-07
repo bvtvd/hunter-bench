@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class FollowRecord extends Model
+class FollowRecord extends BaseModel
 {
     // type 类型常量
     const TYPE_RECOMMEND = 1;   // 推荐
@@ -17,6 +16,5 @@ class FollowRecord extends Model
     const TYPE_JOB_MARK_FAIL = 7;   // 职位标记为失败
     const TYPE_JOB_MARK_CLOSE = 8;  // 职位标记为关闭
 
-    protected $guarded = [];
 
 }

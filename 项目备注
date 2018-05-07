@@ -3,7 +3,7 @@ npm install apidoc -g
 # 生成api文档
 apidoc -i app/Http/Controllers -o public/apidoc/
 
-
+: done
  推荐的一生
     - when(啥时候推荐了)
     - 啥时候去面试了
@@ -18,3 +18,12 @@ apidoc -i app/Http/Controllers -o public/apidoc/
 
 在follow_records中加上  job_id 字段
 并且还要多加几个类型 5. 创建了该职位   6, 职位标记为成功 7. 职位标记为失败,   8. 关闭该职位
+
+
+: TODO::
+
+一 . TODOLIST::
+    1. 数据表, 分类表, Todo记录表
+    2. 分类表(todo_categories), 有三个共有的父级(今天, 未来7天, 项目), 用户可以在项目中新增分类, 可以自定义排序
+
+

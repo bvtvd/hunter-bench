@@ -2,12 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 
-class RecommendNotificationRecord extends Model
+class RecommendNotificationRecord extends BaseModel
 {
-    protected $guarded = [];
-
     /**
      * 标记为已提醒
      * @return bool

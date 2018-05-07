@@ -4,13 +4,11 @@ namespace App\Models;
 
 use App\Traits\Permission;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 
-class Candidate extends Model
+class Candidate extends BaseModel
 {
     use Permission;
 
-    protected $guarded = [];    // 批量赋值黑名单
 
     /**
      * 毕业时间修改器

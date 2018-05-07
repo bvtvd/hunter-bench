@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Permission;
-use Illuminate\Database\Eloquent\Model;
 
-class Recommend extends Model
+class Recommend extends BaseModel
 {
     use Permission;
 
@@ -22,7 +21,6 @@ class Recommend extends Model
         4 => '已关闭'
     ];
 
-    protected $guarded = [];    // 批量赋值黑名单
 
     /**
      * 与人选关联
