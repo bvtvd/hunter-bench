@@ -66,6 +66,15 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 
         });
         Route::resource('recommends', 'RecommendController');
+
+
+        // todoList
+        Route::group(['prefix' => 'todo'], function(){
+            Route::group(['prefix' => 'category'], function(){
+                Route::get('tree', 'TodoListController@getCategoryTree');
+            });
+        });
+        Route::resource('todo', 'TodoListController');
     });
 
 

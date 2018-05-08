@@ -9,9 +9,10 @@
 namespace App\TodoList\Repositories;
 
 use App\Repositories\DbRepository;
+use App\TodoList\Repositories\interfaces\TodoListRepositoryInterface;
 use App\TodoList\TodoList;
 
-class TodoListRepository extends DbRepository
+class TodoListRepository extends DbRepository implements TodoListRepositoryInterface
 {
     protected function model()
     {

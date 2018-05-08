@@ -16,9 +16,9 @@
                                 <Icon type="ios-keypad"></Icon>
                                 <span @click="$router.push({ name: 'hunter.index'})">猎场</span>
                             </MenuItem>
-                            <MenuItem name="3">
+                            <MenuItem name="todoList">
                                 <Icon type="android-list"></Icon>
-                                TodoList
+                                <span @click="$router.push({ name: 'todoList.index'})">TodoList</span>
                             </MenuItem>
                             <MenuItem name="4">
                                 <Icon type="ios-paper"></Icon>

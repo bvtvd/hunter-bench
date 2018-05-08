@@ -86,7 +86,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"0":"54d222b0fcbc49b08d7b","1":"f3b7357fbb2a61e6eb9e","2":"530e8a268c0c97b90c99","3":"80e321326b9301f49c58","4":"dca6b333d4cfd74e6da2","5":"b7b3e73a8548453b87ff","6":"f53776b914e8d2c21433","7":"794457e81d04b75add6e","8":"69a72047f422978fcfef","9":"ed798d9e5c746c419e01","10":"b84e5d822627ebfac4dc"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "js/lazy/" + ({}[chunkId]||chunkId) + "." + {"12":"5d38bc75e576ae65fe8a","13":"222cf3e3ee07b046f73e","14":"1ceacf518444c2e7e260","15":"d549724bf9a600649e28","16":"9b2beeade6fb717d8809","17":"694945e7c50dc9058048","18":"4206de702ff52644c9cb","19":"5575edc2142d8de239a1","20":"d530e28e4cad341bd051","21":"c06159fef6d902792f50","22":"1f0da31a232aba3bd8f3","23":"75d074d320fa5b318ade"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
@@ -16592,7 +16592,7 @@ if (false) {
         path: '/',
         name: 'home',
         component: function component() {
-            return __webpack_require__.e/* import() */(8).then(__webpack_require__.bind(null, 65));
+            return __webpack_require__.e/* import() */(21).then(__webpack_require__.bind(null, 65));
         },
         meta: {
             title: '首页',
@@ -16603,7 +16603,7 @@ if (false) {
             name: 'hunter.index',
             redirect: { name: 'hunter.recommend' }, // 先重定向都客户列表, 后面改为我的推荐
             component: function component() {
-                return __webpack_require__.e/* import() */(6).then(__webpack_require__.bind(null, 66));
+                return __webpack_require__.e/* import() */(19).then(__webpack_require__.bind(null, 66));
             },
             meta: {
                 title: '猎场.首页'
@@ -16615,7 +16615,7 @@ if (false) {
                     title: '猎场.我的推荐'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 67));
+                    return __webpack_require__.e/* import() */(13).then(__webpack_require__.bind(null, 67));
                 }
             }, {
                 path: 'recommend/:id',
@@ -16624,7 +16624,7 @@ if (false) {
                     title: '猎场.推荐详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 68));
+                    return __webpack_require__.e/* import() */(16).then(__webpack_require__.bind(null, 68));
                 }
             }, {
                 path: 'client',
@@ -16633,7 +16633,7 @@ if (false) {
                     title: '猎场.客户列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 69));
+                    return __webpack_require__.e/* import() */(17).then(__webpack_require__.bind(null, 69));
                 }
             }, {
                 path: 'client/:id',
@@ -16642,7 +16642,7 @@ if (false) {
                     title: '猎场.客户详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(9).then(__webpack_require__.bind(null, 70));
+                    return __webpack_require__.e/* import() */(22).then(__webpack_require__.bind(null, 70));
                 }
             }, {
                 path: 'job',
@@ -16651,7 +16651,7 @@ if (false) {
                     title: '猎场.职位列表'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 71));
+                    return __webpack_require__.e/* import() */(14).then(__webpack_require__.bind(null, 71));
                 }
             }, {
                 path: 'job/:id',
@@ -16660,7 +16660,7 @@ if (false) {
                     title: '猎场.职位详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 72));
+                    return __webpack_require__.e/* import() */(12).then(__webpack_require__.bind(null, 72));
                 }
             }, {
                 path: 'candidate',
@@ -16669,7 +16669,7 @@ if (false) {
                     title: '猎场.人选管理'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(5).then(__webpack_require__.bind(null, 73));
+                    return __webpack_require__.e/* import() */(18).then(__webpack_require__.bind(null, 73));
                 }
             }, {
                 path: 'candidate/:id',
@@ -16678,15 +16678,25 @@ if (false) {
                     title: '猎场.人选详情'
                 },
                 component: function component() {
-                    return __webpack_require__.e/* import() */(10).then(__webpack_require__.bind(null, 74));
+                    return __webpack_require__.e/* import() */(23).then(__webpack_require__.bind(null, 74));
                 }
             }]
+        }, {
+            path: 'todo',
+            name: 'todoList.index',
+            component: function component() {
+                return __webpack_require__.e/* import() */(15).then(__webpack_require__.bind(null, 135));
+            },
+            meta: {
+                title: 'TodoList.首页'
+            },
+            children: []
         }]
     }, {
         path: '/login',
         name: 'login',
         component: function component() {
-            return __webpack_require__.e/* import() */(7).then(__webpack_require__.bind(null, 75));
+            return __webpack_require__.e/* import() */(20).then(__webpack_require__.bind(null, 75));
         },
         meta: {
             auth: false

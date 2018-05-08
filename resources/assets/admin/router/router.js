@@ -84,6 +84,17 @@ export default {
                         },
                     ]
                 },
+                {
+                    path: 'todo',
+                    name: 'todoList.index',
+                    component: () => import('../components/todoList/Index'),
+                    meta: {
+                        title: 'TodoList.首页'
+                    },
+                    children: [
+
+                    ]
+                }
             ]
         },
         {

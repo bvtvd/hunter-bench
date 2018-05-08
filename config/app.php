@@ -181,6 +181,12 @@ return [
          * Vendor Service Providers...
          */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
+
+        /**
+         * Own providers
+         */
+        \App\TodoList\Providers\TodoListServiceProvider::class,
     ],
 
     /*
